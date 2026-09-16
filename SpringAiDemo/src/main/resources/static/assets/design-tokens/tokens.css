@@ -1,0 +1,359 @@
+/* ============================================================================
+   SHIKSHAPLUS DESIGN SYSTEM — MASTER TOKENS
+   ============================================================================
+   Version:  2.0.0
+   Updated:  2026-09-10
+   Purpose:  Single source of truth for all ShikshaPlus products.
+             Import this file into any new project to inherit the complete
+             brand design language — colors, typography, spacing, borders,
+             shadows, z-index, transitions, and glassmorphism.
+
+   Usage:
+     @import url('./tokens.css');          — plain HTML / vanilla CSS
+     @import './tokens.css';              — PostCSS / bundler import
+     <link rel="stylesheet" href="./tokens.css"> — HTML <head>
+
+   Dark mode:
+     Add class="dark" to <html> or <body> to activate dark palette.
+   ============================================================================ */
+
+/* --------------------------------------------------------------------------
+   Google Fonts — Official Brand Typefaces
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ============================================================================
+   1. LIGHT MODE (default :root)
+   ============================================================================ */
+:root {
+  /* ── 1a. Brand Colors (Cyan Family) ─────────────────────────────────── */
+  --sp-cyan-glow:            #38BDF8;
+  --sp-cyan-vibrant:         #00B4D8;
+  --sp-cyan-deep:            #0284C7;
+  --sp-cyan-halo:            rgba(56, 189, 248, 0.45);
+  --sp-cyan-subtle:          rgba(56, 189, 248, 0.12);
+  --sp-cyan-border:          rgba(56, 189, 248, 0.30);
+
+  /* ── 1b. Brand Gradient ─────────────────────────────────────────────── */
+  --sp-gradient-brand:       linear-gradient(135deg, #00B4D8 0%, #0284C7 100%);
+  --sp-gradient-text:        linear-gradient(135deg, #FFFFFF 40%, #38BDF8 100%);
+  --sp-gradient-surface:     linear-gradient(180deg, rgba(56, 189, 248, 0.06) 0%, transparent 60%);
+
+  /* ── 1c. Semantic / Surface Colors (Light Mode) ─────────────────────── */
+  --sp-background:           #fbfbfd;
+  --sp-foreground:           #1c1c1f;
+  --sp-surface:              #ffffff;
+  --sp-surface-subtle:       #f5f5f7;
+  --sp-muted:                #86868b;
+
+  /* ── 1d. Semantic Status Colors ─────────────────────────────────────── */
+  --sp-success:              #10B981;
+  --sp-success-subtle:       rgba(16, 185, 129, 0.12);
+  --sp-success-border:       rgba(16, 185, 129, 0.30);
+  --sp-warning:              #F59E0B;
+  --sp-warning-subtle:       rgba(245, 158, 11, 0.12);
+  --sp-warning-border:       rgba(245, 158, 11, 0.30);
+  --sp-error:                #EF4444;
+  --sp-error-subtle:         rgba(239, 68, 68, 0.12);
+  --sp-error-border:         rgba(239, 68, 68, 0.30);
+  --sp-info:                 #3B82F6;
+  --sp-info-subtle:          rgba(59, 130, 246, 0.12);
+  --sp-info-border:          rgba(59, 130, 246, 0.30);
+
+  /* ── 1e. Selection ──────────────────────────────────────────────────── */
+  --sp-selection-bg:         #00B4D8;
+  --sp-selection-text:       #ffffff;
+
+  /* ── 2. BORDERS ─────────────────────────────────────────────────────── */
+  --sp-border:               rgba(0, 0, 0, 0.07);
+  --sp-border-hover:         rgba(0, 0, 0, 0.14);
+  --sp-border-active:        rgba(0, 0, 0, 0.22);
+  --sp-border-brand:         rgba(56, 189, 248, 0.40);
+  --sp-border-focus:         rgba(99, 102, 241, 0.60);
+  --sp-border-width-thin:    1px;
+  --sp-border-width-medium:  2px;
+  --sp-border-width-thick:   4px;
+
+  /* ── 3. BORDER RADIUS ───────────────────────────────────────────────── */
+  --sp-radius-xs:            4px;
+  --sp-radius-sm:            8px;
+  --sp-radius-md:            12px;
+  --sp-radius-lg:            16px;
+  --sp-radius-xl:            20px;
+  --sp-radius-2xl:           24px;
+  --sp-radius-3xl:           32px;
+  --sp-radius-full:          9999px;
+
+  /* ── 4. SHADOWS (Light Mode) ────────────────────────────────────────── */
+  --sp-shadow-xs:            0 1px 2px rgba(0, 0, 0, 0.03);
+  --sp-shadow-sm:            0 2px 8px rgba(0, 0, 0, 0.02);
+  --sp-shadow-md:            0 4px 14px rgba(0, 0, 0, 0.05);
+  --sp-shadow-lg:            0 8px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --sp-shadow-xl:            0 14px 40px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --sp-shadow-2xl:           0 25px 50px rgba(0, 0, 0, 0.10);
+  --sp-shadow-card:          var(--sp-shadow-lg);
+  --sp-shadow-card-hover:    var(--sp-shadow-xl);
+  --sp-shadow-btn:           0 4px 14px rgba(0, 0, 0, 0.10);
+  --sp-shadow-btn-hover:     0 6px 20px rgba(0, 0, 0, 0.15);
+  --sp-shadow-input:         0 2px 8px rgba(0, 0, 0, 0.02);
+  --sp-shadow-input-focus:   0 0 0 3px rgba(99, 102, 241, 0.12);
+
+  /* Glow Shadows (Brand) */
+  --sp-glow-cyan:            0 0 24px rgba(56, 189, 248, 0.45), 0 0 48px rgba(0, 180, 216, 0.20);
+  --sp-glow-cyan-sm:         0 0 12px rgba(56, 189, 248, 0.30);
+  --sp-glow-cyan-lg:         0 0 36px rgba(56, 189, 248, 0.55), 0 0 72px rgba(0, 180, 216, 0.30);
+  --sp-shadow-brand-btn:     0 4px 18px rgba(56, 189, 248, 0.35);
+  --sp-shadow-brand-btn-hover: 0 6px 24px rgba(56, 189, 248, 0.50);
+  --sp-shadow-app-icon:      0 20px 40px -15px rgba(0, 0, 0, 0.60), 0 0 25px rgba(56, 189, 248, 0.20);
+  --sp-shadow-logo-hover:    0 0 16px rgba(56, 189, 248, 0.40);
+
+  /* ── 5. TYPOGRAPHY ──────────────────────────────────────────────────── */
+
+  /* Font Families */
+  --sp-font-display:         'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sp-font-body:            -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --sp-font-mono:            'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Font Weights */
+  --sp-weight-light:         300;
+  --sp-weight-regular:       400;
+  --sp-weight-medium:        500;
+  --sp-weight-semibold:      600;
+  --sp-weight-bold:          700;
+  --sp-weight-extrabold:     800;
+
+  /* Type Scale */
+  --sp-text-hero:            64px;
+  --sp-text-hero-lh:         1.1;
+  --sp-text-hero-weight:     800;
+
+  --sp-text-h1:              46px;
+  --sp-text-h1-lh:           1.15;
+  --sp-text-h1-weight:       800;
+  --sp-text-h1-tracking:     -0.03em;
+
+  --sp-text-h2:              36px;
+  --sp-text-h2-lh:           1.2;
+  --sp-text-h2-weight:       700;
+
+  --sp-text-h3:              26px;
+  --sp-text-h3-lh:           1.3;
+  --sp-text-h3-weight:       800;
+
+  --sp-text-h4:              22px;
+  --sp-text-h4-lh:           1.3;
+  --sp-text-h4-weight:       600;
+
+  --sp-text-lg:              18px;
+  --sp-text-lg-lh:           1.5;
+
+  --sp-text-base:            16px;
+  --sp-text-base-lh:         1.6;
+  --sp-text-base-weight:     400;
+
+  --sp-text-sm:              15px;
+  --sp-text-sm-lh:           1.5;
+
+  --sp-text-xs:              14px;
+  --sp-text-xs-lh:           1.5;
+
+  --sp-text-2xs:             13px;
+  --sp-text-2xs-lh:          1.4;
+
+  --sp-text-3xs:             12px;
+  --sp-text-3xs-lh:          1.4;
+
+  --sp-text-caption:         12px;
+  --sp-text-caption-lh:      1.4;
+  --sp-text-caption-weight:  700;
+  --sp-text-caption-spacing: 0.08em;
+
+  --sp-text-micro:           11px;
+  --sp-text-micro-lh:        1.3;
+
+  --sp-text-nano:            10px;
+  --sp-text-nano-lh:         1.2;
+  --sp-text-nano-spacing:    0.05em;
+
+  /* Letter Spacing */
+  --sp-tracking-tighter:     -0.03em;
+  --sp-tracking-tight:       -0.01em;
+  --sp-tracking-normal:      0;
+  --sp-tracking-wide:        0.05em;
+  --sp-tracking-wider:       0.08em;
+  --sp-tracking-widest:      0.10em;
+  --sp-tracking-ultra:       0.15em;
+
+  /* ── 6. SPACING SCALE ───────────────────────────────────────────────── */
+  --sp-space-0:    0px;
+  --sp-space-0-5:  2px;
+  --sp-space-1:    4px;
+  --sp-space-1-5:  6px;
+  --sp-space-2:    8px;
+  --sp-space-2-5:  10px;
+  --sp-space-3:    12px;
+  --sp-space-3-5:  14px;
+  --sp-space-4:    16px;
+  --sp-space-5:    20px;
+  --sp-space-6:    24px;
+  --sp-space-7:    28px;
+  --sp-space-8:    32px;
+  --sp-space-9:    36px;
+  --sp-space-10:   40px;
+  --sp-space-12:   48px;
+  --sp-space-14:   56px;
+  --sp-space-16:   64px;
+  --sp-space-20:   80px;
+  --sp-space-24:   96px;
+  --sp-space-28:   112px;
+  --sp-space-32:   128px;
+
+  /* ── 7. Z-INDEX SCALE ───────────────────────────────────────────────── */
+  --sp-z-base:       0;
+  --sp-z-raised:     1;
+  --sp-z-dropdown:   10;
+  --sp-z-sticky:     20;
+  --sp-z-navbar:     50;
+  --sp-z-overlay:    100;
+  --sp-z-modal:      200;
+  --sp-z-popover:    300;
+  --sp-z-toast:      400;
+  --sp-z-tooltip:    500;
+  --sp-z-max:        9999;
+
+  /* ── 8. TRANSITIONS & EASING ────────────────────────────────────────── */
+  --sp-duration-instant:     0ms;
+  --sp-duration-fast:        100ms;
+  --sp-duration-normal:      150ms;
+  --sp-duration-moderate:    200ms;
+  --sp-duration-slow:        250ms;
+  --sp-duration-slower:      300ms;
+  --sp-duration-smooth:      400ms;
+  --sp-duration-gentle:      600ms;
+
+  --sp-ease-default:         cubic-bezier(0.4, 0, 0.2, 1);
+  --sp-ease-in:              cubic-bezier(0.4, 0, 1, 1);
+  --sp-ease-out:             cubic-bezier(0, 0, 0.2, 1);
+  --sp-ease-in-out:          cubic-bezier(0.4, 0, 0.2, 1);
+  --sp-ease-spring:          cubic-bezier(0.16, 1, 0.3, 1);
+  --sp-ease-bounce:          cubic-bezier(0.34, 1.56, 0.64, 1);
+  --sp-ease-smooth:          cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* ── 9. GLASSMORPHISM ───────────────────────────────────────────────── */
+  --sp-glass-bg:             rgba(255, 255, 255, 0.60);
+  --sp-glass-bg-heavy:       rgba(255, 255, 255, 0.80);
+  --sp-glass-border:         rgba(255, 255, 255, 0.20);
+  --sp-glass-blur:           12px;
+  --sp-glass-blur-heavy:     24px;
+
+  /* ── 10. CONTAINER / LAYOUT ─────────────────────────────────────────── */
+  --sp-container-max:        1200px;
+  --sp-container-padding:    16px;
+  --sp-container-padding-lg: 24px;
+  --sp-navbar-height:        56px;
+
+  /* ── 11. OPACITY SCALE ──────────────────────────────────────────────── */
+  --sp-opacity-disabled:     0.5;
+  --sp-opacity-muted:        0.6;
+  --sp-opacity-hover:        0.94;
+  --sp-opacity-full:         1;
+}
+
+/* ============================================================================
+   2. DARK MODE (.dark class on <html> or <body>)
+   ============================================================================ */
+.dark {
+  /* ── Surfaces ───────────────────────────────────────────────────────── */
+  --sp-background:           #0B0F19;
+  --sp-foreground:           #f8fafc;
+  --sp-surface:              #151D24;
+  --sp-surface-subtle:       #1E293B;
+  --sp-muted:                #94A3B8;
+
+  /* ── Borders (Dark) ─────────────────────────────────────────────────── */
+  --sp-border:               #272E3F;
+  --sp-border-hover:         rgba(56, 189, 248, 0.35);
+  --sp-border-active:        rgba(56, 189, 248, 0.55);
+
+  /* ── Shadows (Dark — deeper, with optional cyan bleed) ──────────────── */
+  --sp-shadow-xs:            0 1px 2px rgba(0, 0, 0, 0.20);
+  --sp-shadow-sm:            0 2px 8px rgba(0, 0, 0, 0.25);
+  --sp-shadow-md:            0 4px 14px rgba(0, 0, 0, 0.30);
+  --sp-shadow-lg:            0 8px 30px rgba(0, 0, 0, 0.45);
+  --sp-shadow-xl:            0 14px 40px rgba(0, 0, 0, 0.50);
+  --sp-shadow-2xl:           0 25px 50px rgba(0, 0, 0, 0.60);
+  --sp-shadow-card:          0 8px 30px rgba(0, 0, 0, 0.45);
+  --sp-shadow-card-hover:    0 16px 45px rgba(0, 0, 0, 0.60), 0 0 24px rgba(56, 189, 248, 0.12);
+
+  /* ── Glow (Dark — more visible) ─────────────────────────────────────── */
+  --sp-glow-cyan:            0 0 24px rgba(56, 189, 248, 0.55), 0 0 48px rgba(0, 180, 216, 0.25);
+  --sp-glow-cyan-sm:         0 0 12px rgba(56, 189, 248, 0.40);
+  --sp-glow-cyan-lg:         0 0 36px rgba(56, 189, 248, 0.65), 0 0 72px rgba(0, 180, 216, 0.35);
+
+  /* ── Glassmorphism (Dark) ───────────────────────────────────────────── */
+  --sp-glass-bg:             rgba(11, 15, 25, 0.60);
+  --sp-glass-bg-heavy:       rgba(11, 15, 25, 0.85);
+  --sp-glass-border:         rgba(255, 255, 255, 0.08);
+
+  /* ── Status Colors (Dark — slightly brighter for visibility) ────────── */
+  --sp-success:              #34D399;
+  --sp-success-subtle:       rgba(16, 185, 129, 0.15);
+  --sp-warning:              #FBBF24;
+  --sp-warning-subtle:       rgba(245, 158, 11, 0.15);
+  --sp-error:                #F87171;
+  --sp-error-subtle:         rgba(239, 68, 68, 0.15);
+  --sp-info:                 #60A5FA;
+  --sp-info-subtle:          rgba(59, 130, 246, 0.15);
+}
+
+/* ============================================================================
+   3. BASE RESET & GLOBAL STYLES
+   ============================================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: initial; /* Lenis manages smooth scroll */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  color: var(--sp-foreground);
+  background-color: var(--sp-background);
+  font-family: var(--sp-font-body);
+  font-size: var(--sp-text-base);
+  line-height: var(--sp-text-base-lh);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--sp-duration-slow) ease,
+              color var(--sp-duration-slow) ease;
+}
+
+::selection {
+  background-color: var(--sp-selection-bg);
+  color: var(--sp-selection-text);
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background: none;
+}

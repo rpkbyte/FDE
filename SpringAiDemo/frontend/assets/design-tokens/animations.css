@@ -1,0 +1,391 @@
+/* ============================================================================
+   SHIKSHAPLUS DESIGN SYSTEM — ANIMATIONS & SMOOTH SCROLLING
+   ============================================================================
+   Version:  2.0.0
+   Updated:  2026-09-10
+   Purpose:  All animation keyframes, transition utilities, and smooth scroll
+             CSS classes used across ShikshaPlus products. Import AFTER
+             tokens.css to access duration/easing variables.
+
+   Usage:
+     @import url('./tokens.css');
+     @import url('./animations.css');
+
+   Libraries Required (JS — install separately):
+     - framer-motion (React gesture-driven animations)
+     - gsap (timeline-based scene sequencing)
+     - lenis (smooth inertia-based scrolling)
+     - lottie-react (vector micro-animations from After Effects)
+     - three (WebGL 3D canvas)
+
+   See libraries.md for install commands and setup code.
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. CSS KEYFRAME ANIMATIONS
+   ============================================================================ */
+
+/* ── Fade In ──────────────────────────────────────────────────────────────── */
+@keyframes sp-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Fade In Up (slide from below + fade) ─────────────────────────────────── */
+@keyframes sp-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Fade In Down ─────────────────────────────────────────────────────────── */
+@keyframes sp-fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Fade In Scale (zoom in gently) ───────────────────────────────────────── */
+@keyframes sp-fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Slide In Left ────────────────────────────────────────────────────────── */
+@keyframes sp-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Slide In Right ───────────────────────────────────────────────────────── */
+@keyframes sp-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Pulse (breathing glow effect) ────────────────────────────────────────── */
+@keyframes sp-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+/* ── Pulse Scale (heartbeat) ──────────────────────────────────────────────── */
+@keyframes sp-pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+/* ── Shimmer / Skeleton Loading ───────────────────────────────────────────── */
+@keyframes sp-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Spin (for loaders) ───────────────────────────────────────────────────── */
+@keyframes sp-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Bounce (subtle) ──────────────────────────────────────────────────────── */
+@keyframes sp-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-8px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* ── Cyan Glow Pulse (brand effect) ───────────────────────────────────────── */
+@keyframes sp-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3),
+                0 0 40px rgba(0, 180, 216, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.55),
+                0 0 60px rgba(0, 180, 216, 0.30);
+  }
+}
+
+/* ── Float (gentle hover) ─────────────────────────────────────────────────── */
+@keyframes sp-float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
+}
+
+
+/* ============================================================================
+   2. ANIMATION UTILITY CLASSES
+   ============================================================================ */
+
+.animate-fade-in {
+  animation: sp-fade-in var(--sp-duration-smooth) var(--sp-ease-out) forwards;
+}
+
+.animate-fade-in-up {
+  animation: sp-fade-in-up var(--sp-duration-smooth) var(--sp-ease-out) forwards;
+}
+
+.animate-fade-in-down {
+  animation: sp-fade-in-down var(--sp-duration-smooth) var(--sp-ease-out) forwards;
+}
+
+.animate-fade-in-scale {
+  animation: sp-fade-in-scale var(--sp-duration-slower) var(--sp-ease-spring) forwards;
+}
+
+.animate-slide-in-left {
+  animation: sp-slide-in-left var(--sp-duration-smooth) var(--sp-ease-out) forwards;
+}
+
+.animate-slide-in-right {
+  animation: sp-slide-in-right var(--sp-duration-smooth) var(--sp-ease-out) forwards;
+}
+
+.animate-pulse {
+  animation: sp-pulse 2s var(--sp-ease-in-out) infinite;
+}
+
+.animate-pulse-scale {
+  animation: sp-pulse-scale 2s var(--sp-ease-in-out) infinite;
+}
+
+.animate-spin {
+  animation: sp-spin 1s linear infinite;
+}
+
+.animate-bounce {
+  animation: sp-bounce 1s infinite;
+}
+
+.animate-glow-pulse {
+  animation: sp-glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: sp-float 3s ease-in-out infinite;
+}
+
+/* ── Skeleton / Shimmer Loading ───────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--sp-surface-subtle) 25%,
+    var(--sp-surface) 37%,
+    var(--sp-surface-subtle) 63%
+  );
+  background-size: 400% 100%;
+  animation: sp-shimmer 1.4s ease infinite;
+  border-radius: var(--sp-radius-md);
+}
+
+/* ── Stagger Delay Helpers (for lists) ────────────────────────────────────── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.10s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.20s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.30s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.40s; }
+
+
+/* ============================================================================
+   3. TRANSITION UTILITY CLASSES
+   ============================================================================ */
+
+.transition-fast {
+  transition-property: all;
+  transition-duration: var(--sp-duration-fast);
+  transition-timing-function: var(--sp-ease-default);
+}
+
+.transition-normal {
+  transition-property: all;
+  transition-duration: var(--sp-duration-normal);
+  transition-timing-function: var(--sp-ease-default);
+}
+
+.transition-moderate {
+  transition-property: all;
+  transition-duration: var(--sp-duration-moderate);
+  transition-timing-function: var(--sp-ease-default);
+}
+
+.transition-smooth {
+  transition-property: all;
+  transition-duration: var(--sp-duration-smooth);
+  transition-timing-function: var(--sp-ease-spring);
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--sp-duration-normal);
+  transition-timing-function: ease;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-duration: var(--sp-duration-moderate);
+  transition-timing-function: var(--sp-ease-spring);
+}
+
+.transition-shadow {
+  transition-property: box-shadow;
+  transition-duration: var(--sp-duration-moderate);
+  transition-timing-function: ease;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-duration: var(--sp-duration-moderate);
+  transition-timing-function: ease;
+}
+
+
+/* ============================================================================
+   4. HOVER / INTERACTION EFFECTS
+   ============================================================================ */
+
+/* ── Lift on Hover (card-style) ───────────────────────────────────────────── */
+.hover-lift {
+  transition: transform var(--sp-duration-moderate) var(--sp-ease-spring);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* ── Scale on Hover ───────────────────────────────────────────────────────── */
+.hover-scale {
+  transition: transform var(--sp-duration-moderate) var(--sp-ease-spring);
+}
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ── Tap / Press Scale ────────────────────────────────────────────────────── */
+.active-scale:active {
+  transform: scale(0.98);
+}
+
+/* ── Slide Arrow on Hover (for CTAs) ──────────────────────────────────────── */
+.hover-slide-right {
+  transition: transform var(--sp-duration-moderate) ease;
+}
+.hover-slide-right:hover {
+  transform: translateX(4px);
+}
+
+
+/* ============================================================================
+   5. LENIS SMOOTH SCROLLING — CSS CLASSES
+   ============================================================================
+   Lenis (npm: lenis) provides inertia-based smooth scrolling.
+   These CSS classes are required for Lenis to function properly.
+   The JS initialisation is in libraries.md.
+   ============================================================================ */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+
+/* ============================================================================
+   6. REDUCED MOTION — ACCESSIBILITY
+   ============================================================================
+   Automatically disables animations for users who prefer reduced motion.
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================================
+   7. FRAMER MOTION — RECOMMENDED VARIANTS (Reference)
+   ============================================================================
+   These are not CSS classes but JS variant objects. Documented here so
+   designers and developers know which motion patterns the brand uses.
+
+   ── Container Stagger ──
+   const containerVariants = {
+     hidden: { opacity: 0 },
+     visible: {
+       opacity: 1,
+       transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+     },
+   };
+
+   ── Item Fade-Up ──
+   const itemVariants = {
+     hidden: { opacity: 0, y: 15 },
+     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+   };
+
+   ── Card Hover Lift ──
+   <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
+
+   ── Button Press ──
+   <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+
+   ── Card Hover + Scale ──
+   <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
+
+   ============================================================================ */

@@ -1,0 +1,501 @@
+/* ============================================================================
+   SHIKSHAPLUS DESIGN SYSTEM — COMPONENT UTILITY CLASSES
+   ============================================================================
+   Version:  2.0.0
+   Updated:  2026-09-10
+   Purpose:  Pre-built, reusable component classes used across all ShikshaPlus
+             products. Import AFTER tokens.css so CSS variables are available.
+
+   Usage:
+     @import url('./tokens.css');
+     @import url('./components.css');
+   ============================================================================ */
+
+/* ============================================================================
+   1. CARDS
+   ============================================================================ */
+
+/* ── Soft Elevated Card ───────────────────────────────────────────────────── */
+.card-soft {
+  background-color: var(--sp-surface);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  border-radius: var(--sp-radius-xl);
+  box-shadow: var(--sp-shadow-card);
+  transition:
+    transform var(--sp-duration-moderate) var(--sp-ease-spring),
+    box-shadow var(--sp-duration-moderate) var(--sp-ease-spring),
+    border-color var(--sp-duration-moderate) ease;
+}
+
+.card-soft:hover {
+  border-color: var(--sp-border-hover);
+  box-shadow: var(--sp-shadow-card-hover);
+}
+
+/* ── Asset Card (used in brand asset gallery) ─────────────────────────────── */
+.asset-card {
+  background: var(--sp-surface);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform var(--sp-duration-moderate) ease,
+    border-color var(--sp-duration-moderate) ease,
+    box-shadow var(--sp-duration-moderate) ease;
+}
+
+.asset-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sp-border-brand);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+/* ── Token Card (for color swatch displays) ───────────────────────────────── */
+.token-card {
+  background: var(--sp-surface);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  padding: var(--sp-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-3);
+}
+
+/* ── Glass Card (frosted glass effect) ────────────────────────────────────── */
+.card-glass {
+  background: var(--sp-glass-bg);
+  backdrop-filter: blur(var(--sp-glass-blur));
+  -webkit-backdrop-filter: blur(var(--sp-glass-blur));
+  border: var(--sp-border-width-thin) solid var(--sp-glass-border);
+  border-radius: var(--sp-radius-xl);
+  box-shadow: var(--sp-shadow-lg);
+}
+
+.card-glass-heavy {
+  background: var(--sp-glass-bg-heavy);
+  backdrop-filter: blur(var(--sp-glass-blur-heavy));
+  -webkit-backdrop-filter: blur(var(--sp-glass-blur-heavy));
+  border: var(--sp-border-width-thin) solid var(--sp-glass-border);
+  border-radius: var(--sp-radius-xl);
+  box-shadow: var(--sp-shadow-xl);
+}
+
+
+/* ============================================================================
+   2. BUTTONS
+   ============================================================================ */
+
+/* ── Primary Button (foreground fill) ─────────────────────────────────────── */
+.btn-soft-primary {
+  background-color: var(--sp-foreground);
+  color: var(--sp-background);
+  border-radius: var(--sp-radius-md);
+  box-shadow: var(--sp-shadow-btn);
+  font-weight: var(--sp-weight-semibold);
+  transition:
+    transform var(--sp-duration-normal) ease,
+    opacity var(--sp-duration-normal) ease,
+    box-shadow var(--sp-duration-normal) ease;
+}
+
+.btn-soft-primary:hover {
+  opacity: var(--sp-opacity-hover);
+  box-shadow: var(--sp-shadow-btn-hover);
+}
+
+.btn-soft-primary:active {
+  transform: scale(0.98);
+}
+
+/* ── Secondary Button (outlined / ghost) ──────────────────────────────────── */
+.btn-soft-secondary {
+  background-color: var(--sp-surface);
+  color: var(--sp-foreground);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  border-radius: var(--sp-radius-md);
+  box-shadow: var(--sp-shadow-xs);
+  font-weight: var(--sp-weight-medium);
+  transition:
+    background-color var(--sp-duration-normal) ease,
+    border-color var(--sp-duration-normal) ease,
+    transform var(--sp-duration-normal) ease;
+}
+
+.btn-soft-secondary:hover {
+  background-color: var(--sp-surface-subtle);
+  border-color: var(--sp-border-hover);
+}
+
+.btn-soft-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ── Brand Cyan Gradient Button ───────────────────────────────────────────── */
+.btn-brand-cyan {
+  background: var(--sp-gradient-brand);
+  color: #ffffff;
+  border-radius: var(--sp-radius-md);
+  box-shadow: var(--sp-shadow-brand-btn);
+  font-weight: var(--sp-weight-semibold);
+  transition:
+    transform var(--sp-duration-normal) ease,
+    opacity var(--sp-duration-normal) ease,
+    box-shadow var(--sp-duration-normal) ease;
+}
+
+.btn-brand-cyan:hover {
+  opacity: 0.95;
+  box-shadow: var(--sp-shadow-brand-btn-hover);
+}
+
+.btn-brand-cyan:active {
+  transform: scale(0.98);
+}
+
+/* ── Ghost / Icon Button ──────────────────────────────────────────────────── */
+.btn-ghost {
+  background: transparent;
+  color: var(--sp-muted);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  border-radius: var(--sp-radius-sm);
+  padding: var(--sp-space-1-5);
+  transition:
+    background-color var(--sp-duration-normal) ease,
+    color var(--sp-duration-normal) ease;
+}
+
+.btn-ghost:hover {
+  background-color: var(--sp-surface-subtle);
+  color: var(--sp-foreground);
+}
+
+/* ── Disabled State (works on any button variant) ─────────────────────────── */
+.btn-disabled,
+button:disabled {
+  opacity: var(--sp-opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+
+/* ============================================================================
+   3. INPUTS & FORMS
+   ============================================================================ */
+
+/* ── Soft Input Field ─────────────────────────────────────────────────────── */
+.input-soft {
+  background-color: var(--sp-surface);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  color: var(--sp-foreground);
+  border-radius: var(--sp-radius-md);
+  box-shadow: var(--sp-shadow-input);
+  padding: var(--sp-space-2-5) var(--sp-space-4);
+  font-size: var(--sp-text-sm);
+  transition:
+    border-color var(--sp-duration-moderate) ease,
+    box-shadow var(--sp-duration-moderate) ease;
+}
+
+.input-soft:focus {
+  outline: none;
+  border-color: var(--sp-border-focus);
+  box-shadow: var(--sp-shadow-input-focus);
+}
+
+.input-soft::placeholder {
+  color: var(--sp-muted);
+  opacity: 0.7;
+}
+
+/* ── Textarea ─────────────────────────────────────────────────────────────── */
+.textarea-soft {
+  background-color: var(--sp-surface);
+  border: var(--sp-border-width-thin) solid var(--sp-border);
+  color: var(--sp-foreground);
+  border-radius: var(--sp-radius-lg);
+  box-shadow: var(--sp-shadow-input);
+  padding: var(--sp-space-3) var(--sp-space-4);
+  font-size: var(--sp-text-sm);
+  resize: vertical;
+  min-height: 100px;
+  transition:
+    border-color var(--sp-duration-moderate) ease,
+    box-shadow var(--sp-duration-moderate) ease;
+}
+
+.textarea-soft:focus {
+  outline: none;
+  border-color: var(--sp-border-focus);
+  box-shadow: var(--sp-shadow-input-focus);
+}
+
+
+/* ============================================================================
+   4. BADGES & TAGS
+   ============================================================================ */
+
+/* ── Brand Badge (pill) ───────────────────────────────────────────────────── */
+.badge-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-space-1-5);
+  padding: var(--sp-space-1) var(--sp-space-2-5);
+  border-radius: var(--sp-radius-full);
+  background: var(--sp-cyan-subtle);
+  border: var(--sp-border-width-thin) solid var(--sp-cyan-border);
+  color: var(--sp-cyan-glow);
+  font-weight: var(--sp-weight-semibold);
+  font-size: var(--sp-text-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--sp-tracking-wide);
+}
+
+/* ── Format Badges (SVG / PNG / DOC) ──────────────────────────────────────── */
+.badge-format {
+  font-size: var(--sp-text-micro);
+  font-weight: var(--sp-weight-bold);
+  padding: 2px var(--sp-space-2);
+  border-radius: var(--sp-radius-xs);
+  background: var(--sp-cyan-subtle);
+  color: var(--sp-cyan-glow);
+}
+
+.badge-format.png {
+  background: var(--sp-success-subtle);
+  color: var(--sp-success);
+}
+
+.badge-format.doc {
+  background: var(--sp-info-subtle);
+  color: var(--sp-info);
+}
+
+/* ── Status Badges ────────────────────────────────────────────────────────── */
+.badge-success {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-space-1);
+  padding: var(--sp-space-0-5) var(--sp-space-2);
+  border-radius: var(--sp-radius-full);
+  background: var(--sp-success-subtle);
+  border: var(--sp-border-width-thin) solid var(--sp-success-border);
+  color: var(--sp-success);
+  font-size: var(--sp-text-nano);
+  font-weight: var(--sp-weight-semibold);
+}
+
+.badge-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-space-1);
+  padding: var(--sp-space-0-5) var(--sp-space-2);
+  border-radius: var(--sp-radius-full);
+  background: var(--sp-warning-subtle);
+  border: var(--sp-border-width-thin) solid var(--sp-warning-border);
+  color: var(--sp-warning);
+  font-size: var(--sp-text-nano);
+  font-weight: var(--sp-weight-semibold);
+}
+
+.badge-error {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-space-1);
+  padding: var(--sp-space-0-5) var(--sp-space-2);
+  border-radius: var(--sp-radius-full);
+  background: var(--sp-error-subtle);
+  border: var(--sp-border-width-thin) solid var(--sp-error-border);
+  color: var(--sp-error);
+  font-size: var(--sp-text-nano);
+  font-weight: var(--sp-weight-semibold);
+}
+
+
+/* ============================================================================
+   5. EFFECTS & DECORATIONS
+   ============================================================================ */
+
+/* ── Cyan Glow ────────────────────────────────────────────────────────────── */
+.glow-cyan {
+  box-shadow: var(--sp-glow-cyan);
+}
+
+.glow-cyan-sm {
+  box-shadow: var(--sp-glow-cyan-sm);
+}
+
+.glow-cyan-lg {
+  box-shadow: var(--sp-glow-cyan-lg);
+}
+
+/* ── Text Gradient (brand hero text) ──────────────────────────────────────── */
+.text-gradient-brand {
+  background: var(--sp-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Divider ──────────────────────────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--sp-border);
+  border: none;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: var(--sp-space-3);
+  background: var(--sp-border);
+}
+
+/* ── Pillar Header (accent left border) ───────────────────────────────────── */
+.pillar-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-1-5);
+  margin-bottom: var(--sp-space-6);
+  border-left: var(--sp-border-width-thick) solid var(--sp-cyan-glow);
+  padding-left: var(--sp-space-4);
+}
+
+
+/* ============================================================================
+   6. PREVIEW & CHECKERBOARD BACKGROUNDS
+   ============================================================================ */
+
+/* ── Preview Box (image containers in asset galleries) ────────────────────── */
+.preview-box {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--sp-background);
+  position: relative;
+  padding: var(--sp-space-5);
+}
+
+.preview-box img,
+.preview-box object {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.preview-box.wide-box {
+  height: 200px;
+}
+
+/* ── Transparency Checkerboard (Dark) ─────────────────────────────────────── */
+.checker-dark {
+  background-color: #0d121c;
+  background-image:
+    linear-gradient(45deg, #131926 25%, transparent 25%),
+    linear-gradient(-45deg, #131926 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #131926 75%),
+    linear-gradient(-45deg, transparent 75%, #131926 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* ── Transparency Checkerboard (Light) ────────────────────────────────────── */
+.checker-light {
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+    linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+    linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+
+/* ============================================================================
+   7. LAYOUT GRIDS
+   ============================================================================ */
+
+/* ── Asset Grid ───────────────────────────────────────────────────────────── */
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sp-space-6);
+}
+
+/* ── Token Grid ───────────────────────────────────────────────────────────── */
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-space-4);
+}
+
+
+/* ============================================================================
+   8. LAYOUT UTILITIES
+   ============================================================================ */
+
+/* ── Container ────────────────────────────────────────────────────────────── */
+.sp-container {
+  max-width: var(--sp-container-max);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--sp-container-padding);
+  padding-right: var(--sp-container-padding);
+}
+
+@media (min-width: 640px) {
+  .sp-container {
+    padding-left: var(--sp-container-padding-lg);
+    padding-right: var(--sp-container-padding-lg);
+  }
+}
+
+/* ── Hide Scrollbar ───────────────────────────────────────────────────────── */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Screen Reader Only ───────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Truncate Text ────────────────────────────────────────────────────────── */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

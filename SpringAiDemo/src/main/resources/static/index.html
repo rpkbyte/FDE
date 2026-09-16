@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShikshaPlus — Official Support AI</title>
+  
+  <!-- Digital App Kit Favicons -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+
+  <!-- Official Brand Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Official Brand Design Tokens -->
+  <link rel="stylesheet" href="assets/design-tokens/tokens.css" />
+  <link rel="stylesheet" href="assets/design-tokens/components.css" />
+  <link rel="stylesheet" href="assets/design-tokens/animations.css" />
+
+  <!-- Master Chatbot Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="chat-wrapper">
+    <!-- Header with Official Brand Lockup -->
+    <header class="chat-header">
+      <div class="brand-container">
+        <div class="brand-logo-box">
+          <img
+            id="brandLogoDark"
+            class="brand-logo logo-dark"
+            src="assets/logos/shikshaplus_horizontal_dark_transparent.png"
+            alt="ShikshaPlus"
+          />
+          <img
+            id="brandLogoLight"
+            class="brand-logo logo-light hidden"
+            src="assets/logos/shikshaplus_horizontal_light_transparent.png"
+            alt="ShikshaPlus"
+          />
+        </div>
+        <div class="header-divider"></div>
+        <div class="brand-meta">
+          <span class="ai-badge">SUPPORT AI</span>
+          <div class="status-pill">
+            <span class="status-pulse"></span>
+            <span id="statusIndicator">Engine Online • 24/7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Theme Toggle (Dark/Light) -->
+        <button id="themeToggleBtn" class="action-btn" title="Toggle Theme" aria-label="Toggle theme">
+          <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg id="moonIcon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Connection Settings -->
+        <button id="settingsBtn" class="action-btn" title="Backend Connection" aria-label="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+
+        <!-- Clear Conversation -->
+        <button id="clearChatBtn" class="action-btn" title="New Chat / Reset" aria-label="Clear chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Connection Banner -->
+    <div id="connectionBanner" class="connection-banner hidden">
+      <div class="banner-content">
+        <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>Spring Boot server is offline at <strong id="bannerUrl">http://localhost:8080</strong>.</span>
+      </div>
+      <button id="retryConnectionBtn" class="banner-retry-btn">Reconnect</button>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal hidden">
+      <div class="settings-header">
+        <h3>Backend API Connection</h3>
+        <button id="closeSettingsBtn" class="close-btn">&times;</button>
+      </div>
+      <div class="settings-body">
+        <label for="backendUrlInput">API Server Base URL:</label>
+        <input type="text" id="backendUrlInput" placeholder="http://localhost:8080" />
+        <small>Default is <code>http://localhost:8080</code> for local Spring Boot.</small>
+        <div class="settings-actions">
+          <button id="saveSettingsBtn" class="sp-btn primary">Save & Connect</button>
+          <button id="resetSettingsBtn" class="sp-btn secondary">Reset to Default</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Body Area -->
+    <main class="chat-body" id="chatBody">
+      <!-- Welcome Hero Card featuring Official 3D App Icon -->
+      <div class="welcome-card" id="welcomeCard">
+        <div class="welcome-avatar-container">
+          <img
+            class="welcome-app-icon"
+            src="assets/icons/shikshaplus_app_icon_dark.png"
+            alt="ShikshaPlus App Icon"
+          />
+          <div class="glow-ring"></div>
+        </div>
+
+        <div class="brand-tagline">EMPOWERING MINDS • ELEVATING FUTURES</div>
+        <h2 class="welcome-title">ShikshaPlus Support AI</h2>
+        <p class="welcome-desc">
+          Namaste! I am your 24/7 ShikshaPlus assistant. How can I help you with your courses, login, certificates, or platform features today?
+        </p>
+        
+        <div class="faq-section-title">QUICK ASSISTANCE TOPICS</div>
+        <div class="quick-chips">
+          <button class="chip" data-query="How do I access my purchased courses on ShikshaPlus?">
+            <span class="chip-icon">📚</span>
+            <span>Access Purchased Courses</span>
+          </button>
+          <button class="chip" data-query="I forgot my password. How can I reset my ShikshaPlus account?">
+            <span class="chip-icon">🔑</span>
+            <span>Password & Login Help</span>
+          </button>
+          <button class="chip" data-query="How do I join live classes and test series on ShikshaPlus?">
+            <span class="chip-icon">🎥</span>
+            <span>Live Classes & Tests</span>
+          </button>
+          <button class="chip" data-query="What is the refund and cancellation policy?">
+            <span class="chip-icon">💳</span>
+            <span>Refunds & Payments</span>
+          </button>
+          <button class="chip" data-query="How can I download my course completion certificate?">
+            <span class="chip-icon">📜</span>
+            <span>Course Certificates</span>
+          </button>
+          <button class="chip" data-query="How can I contact the human customer support team?">
+            <span class="chip-icon">📞</span>
+            <span>Talk to Human Support</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Stream -->
+      <div id="messagesContainer" class="messages-container"></div>
+
+      <!-- Typing Indicator -->
+      <div id="typingIndicator" class="typing-indicator hidden">
+        <div class="typing-avatar">
+          <img src="assets/icons/shikshaplus_app_icon_dark.png" alt="ShikshaPlus AI" />
+        </div>
+        <div class="typing-bubble">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Chat Footer & Input Form -->
+    <footer class="chat-footer">
+      <form id="chatForm" class="chat-form">
+        <div class="input-box">
+          <textarea
+            id="messageInput"
+            rows="1"
+            placeholder="Ask ShikshaPlus Support AI (English or Hinglish)..."
+            aria-label="Ask ShikshaPlus Support"
+            required
+          ></textarea>
+          <button type="submit" id="sendBtn" class="send-button" title="Send Message" aria-label="Send">
+            <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="footer-bottom-bar">
+          <span>Press <strong>Enter</strong> to send, <strong>Shift + Enter</strong> for a new line</span>
+          <span class="brand-pill">Official ShikshaPlus AI • English & Hinglish</span>
+        </div>
+      </form>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
