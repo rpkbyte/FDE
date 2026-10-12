@@ -1,0 +1,12 @@
+spring.application.name=KortexChatBot
+server.port=8080
+
+# Spring AI OpenAI configuration
+# Works with OpenAI, Groq, Ollama, OpenRouter, DeepSeek, etc.
+spring.ai.openai.api-key=${OPENAI_API_KEY:your_api_key_here}
+spring.ai.openai.base-url=${OPENAI_BASE_URL:https://openrouter.ai/api/v1}
+spring.ai.openai.chat.options.model=${OPENAI_MODEL:openrouter/free}
+
+# Logging configuration
+logging.level.online.shikshaplus.ChatBot=INFO
+spring.main.banner-mode=off

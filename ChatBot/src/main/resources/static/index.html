@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kortex - Minimalist Streaming AI Assistant</title>
+  <meta name="description" content="Token-efficient AI ChatBot with dynamic, on-demand tool execution and streaming response architecture.">
+  <link rel="stylesheet" href="/css/app.css?v=2.1">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Collapsible Minimalist Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <svg class="icon" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="3" ry="3"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>KORTEX</span>
+          <span class="brand-badge">v1.0</span>
+        </div>
+      </div>
+
+      <button class="new-chat-btn" id="new-chat-btn">
+        <svg class="icon icon-sm" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        New Conversation
+      </button>
+
+      <div class="sidebar-section-title">Recent Chats</div>
+      <ul class="chat-history-list" id="chat-history-list"></ul>
+
+      <div class="sidebar-footer">
+        <div class="token-savings-card">
+          <div class="title">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" style="color:var(--accent-green);">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            Token Economy
+          </div>
+          <div class="metric">
+            <span id="sidebar-saved-tokens">0</span>
+            <span class="unit">tokens saved</span>
+          </div>
+          <div class="hint">Tokens saved by omitting unused tool definitions</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Canvas -->
+    <main class="main-canvas">
+      <!-- Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          <button class="icon-btn" id="toggle-sidebar-btn" title="Toggle Sidebar">
+            <svg class="icon" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="status-indicator" id="status-indicator">
+            <span class="status-dot sim"></span>
+            <span class="status-label">Demo Mode (Zero-Token Live Tools)</span>
+          </div>
+          <div class="header-token-badge" id="header-saved-badge">
+            <svg class="icon icon-sm" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span id="header-saved-text">~700t saved/req</span>
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <button class="icon-btn" id="clear-chat-btn" title="Clear Conversation">
+            <svg class="icon" viewBox="0 0 24 24">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" id="theme-toggle-btn" title="Toggle Theme">
+            <!-- Theme Icon Injected Dynamically -->
+          </button>
+          <button class="icon-btn" id="settings-btn" title="Settings">
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Message History Thread -->
+      <div class="messages-container" id="messages-container">
+        <div class="messages-inner" id="messages-inner"></div>
+      </div>
+
+      <!-- Bottom Dock: Dynamic Tool Selector & Input -->
+      <footer class="bottom-dock">
+        <div class="bottom-inner">
+          <!-- Dynamic Selective Tools Bar -->
+          <div class="tools-toolbar">
+            <div class="tools-pills-group" id="tools-pills-group">
+              <!-- Dynamically populated tool pills with SVG icons -->
+            </div>
+            <div class="token-economy-hint" id="active-tools-hint">
+              Active Tools: <strong>2/4</strong> | Saved <strong>~700 tokens</strong> / req
+            </div>
+          </div>
+
+          <!-- Input Box -->
+          <div class="input-box-container">
+            <textarea
+              class="chat-textarea"
+              id="chat-textarea"
+              placeholder="Ask anything, or toggle active tools (Enter to send, Shift+Enter for newline)..."
+              rows="1"
+            ></textarea>
+            <button class="send-btn" id="send-btn" title="Send message">
+              <svg class="icon" viewBox="0 0 24 24" style="stroke-width:2.5;">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </button>
+            <button class="stop-btn" id="stop-btn" title="Stop generating">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Prompt Suggestions with SVG Icons -->
+          <div class="prompt-suggestions" id="prompt-suggestions">
+            <button class="suggestion-chip" data-prompt="Search latest AI news today">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              Latest AI news today
+            </button>
+            <button class="suggestion-chip" data-prompt="What is the weather in Tokyo right now?">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 2v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="M20 12h2"></path><path d="m19.07 4.93-1.41 1.41"></path><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"></path><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"></path></svg>
+              Weather in Tokyo
+            </button>
+            <button class="suggestion-chip" data-prompt="Calculate sqrt(144) + 25 * 4">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path></svg>
+              sqrt(144) + 25 * 4
+            </button>
+            <button class="suggestion-chip" data-prompt="Convert 250 USD to EUR">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"></circle><path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path><path d="M7 6h1.5a1 1 0 0 1 0 2H7"></path><path d="M8 5v5"></path></svg>
+              Convert 250 USD to EUR
+            </button>
+            <button class="suggestion-chip" data-prompt="Run systeminfo in terminal">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              Run systeminfo
+            </button>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Minimalist Settings Modal -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg class="icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          Model & Endpoint Configuration
+        </div>
+        <button class="icon-btn" id="close-settings-btn">
+          <svg class="icon icon-sm" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="input-api-key">API Key (Optional)</label>
+          <input type="password" class="form-input" id="input-api-key" placeholder="sk-... (OpenAI, Groq, OpenRouter)">
+          <div class="form-hint">Leave blank to use the built-in live tool demonstration engine.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-base-url">Base URL (Optional)</label>
+          <input type="text" class="form-input" id="input-base-url" placeholder="https://api.openai.com or http://localhost:11434/v1">
+          <div class="form-hint">Custom OpenAI-compatible base URL (e.g. Groq, Ollama, DeepSeek).</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-model">Model Name</label>
+          <input type="text" class="form-input" id="input-model" value="gpt-4o-mini" placeholder="gpt-4o-mini, llama-3.3-70b-versatile, etc.">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="document.getElementById('settings-modal').classList.remove('open')">Cancel</button>
+        <button class="btn-primary" id="save-settings-btn">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js?v=2.1"></script>
+</body>
+</html>
