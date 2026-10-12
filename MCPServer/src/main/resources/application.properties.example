@@ -1,0 +1,8 @@
+spring.application.name=MCPServer
+
+# =============================================================
+# 2. OPENROUTER CONFIGURATION (Chat Model)
+# =============================================================
+spring.ai.openai.base-url=${OPENROUTER_BASE_URL:https://openrouter.ai/api/v1}
+spring.ai.openai.api-key=${OPENROUTER_API_KEY:your_openrouter_api_key_here}
+spring.ai.openai.chat.options.model=${OPENROUTER_MODEL:openrouter/free}
