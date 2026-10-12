@@ -1,0 +1,23 @@
+spring.application.name=AiDemo
+# Specify active model types in Spring AI 2.0.1
+spring.ai.model.chat=openai
+spring.ai.model.embedding=ollama
+
+# =============================================================
+# 2. OPENROUTER CONFIGURATION (Chat Model)
+# =============================================================
+spring.ai.openai.base-url=${OPENROUTER_BASE_URL:https://openrouter.ai/api/v1}
+spring.ai.openai.api-key=${OPENROUTER_API_KEY:your_openrouter_api_key_here}
+spring.ai.openai.chat.options.model=${OPENROUTER_MODEL:openrouter/free}
+
+# =============================================================
+# 3. OLLAMA CONFIGURATION (384-dim Embedding Model)
+# =============================================================
+spring.ai.ollama.base-url=${OLLAMA_BASE_URL:http://localhost:11434}
+spring.ai.ollama.embedding.options.model=all-minilm:latest
+# =============================================================
+# 4. PINECONE CONFIGURATION (Vector Store)
+# =============================================================
+spring.ai.vectorstore.pinecone.api-key=${PINECONE_API_KEY:your_pinecone_api_key_here}
+spring.ai.vectorstore.pinecone.index-name=${PINECONE_INDEX_NAME:company-support}
+spring.ai.vectorstore.pinecone.namespace=${PINECONE_NAMESPACE:company-support}

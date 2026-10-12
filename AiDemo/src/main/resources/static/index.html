@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaTech Solutions — AI Support Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bot-bubble: #f1f5f9;
+            --user-bubble: #2563eb;
+            --user-text: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.06), 0 4px 6px -2px rgba(0,0,0,0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .chat-app {
+            width: 100%;
+            max-width: 900px;
+            height: 92vh;
+            background: var(--surface-color);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .chat-header {
+            padding: 18px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        .header-info h1 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .header-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        .badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid #bfdbfe;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Quick Suggestions */
+        .suggestions {
+            display: flex;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #fafafa;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+
+        .suggestions::-webkit-scrollbar {
+            display: none;
+        }
+
+        .suggestion-chip {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            color: #334155;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .suggestion-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* Message Area */
+        .chat-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background: #fafcff;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            max-width: 82%;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .msg-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .bot .msg-avatar {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .user .msg-avatar {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .bubble {
+            padding: 13px 17px;
+            border-radius: 16px;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            word-break: break-word;
+        }
+
+        .bot .bubble {
+            background: var(--surface-color);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-top-left-radius: 4px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bot .bubble strong {
+            color: #0f172a;
+        }
+
+        .bot .bubble ul, .bot .bubble ol {
+            margin-left: 18px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+
+        .bot .bubble li {
+            margin-bottom: 4px;
+        }
+
+        .user .bubble {
+            background: var(--user-bubble);
+            color: var(--user-text);
+            border-top-right-radius: 4px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22);
+        }
+
+        /* Streaming Cursor */
+        .cursor {
+            display: inline-block;
+            width: 7px;
+            height: 15px;
+            background-color: var(--primary);
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Typing Dots Animation */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 18px;
+            background: var(--surface-color);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+            width: fit-content;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: #94a3b8;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Input Area */
+        .chat-input-area {
+            padding: 16px 24px;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+        }
+
+        .input-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-box {
+            flex: 1;
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            outline: none;
+            background: #f8fafc;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .input-box:focus {
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .send-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        .send-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-app">
+    <!-- Header -->
+    <header class="chat-header">
+        <div class="header-left">
+            <div class="avatar">NT</div>
+            <div class="header-info">
+                <h1>NovaTech Support Assistant</h1>
+                <p><span class="status-dot"></span> Live Token Streaming Active</p>
+            </div>
+        </div>
+        <div class="badge">⚡ Streaming RAG</div>
+    </header>
+
+    <!-- Quick Questions Chips -->
+    <div class="suggestions">
+        <button class="suggestion-chip" onclick="askQuickQuestion('How do I reset my forgotten password?')">🔑 Reset Password</button>
+        <button class="suggestion-chip" onclick="askQuickQuestion('What is your refund policy?')">💳 Refund Policy</button>
+        <button class="suggestion-chip" onclick="askQuickQuestion('Can I cancel my subscription anytime?')">❌ Cancel Subscription</button>
+        <button class="suggestion-chip" onclick="askQuickQuestion('Why is the website or app not loading?')">⚡ Troubleshooting</button>
+        <button class="suggestion-chip" onclick="askQuickQuestion('What software development services do you provide?')">💻 Services</button>
+    </div>
+
+    <!-- Message Stream -->
+    <main class="chat-messages" id="chatMessages">
+        <div class="message bot">
+            <div class="msg-avatar">N</div>
+            <div class="bubble">
+                Hello! 👋 I am the official <strong>NovaTech Solutions</strong> Support Assistant.<br><br>
+                Answers stream in real-time from our verified knowledge base. How can I assist you today?
+            </div>
+        </div>
+    </main>
+
+    <!-- Input Box -->
+    <footer class="chat-input-area">
+        <form class="input-form" id="chatForm" onsubmit="handleSend(event)">
+            <input 
+                type="text" 
+                class="input-box" 
+                id="messageInput" 
+                placeholder="Ask a question about NovaTech policies, billing, account..." 
+                autocomplete="off"
+            />
+            <button type="submit" class="send-btn" id="sendBtn">
+                Send <span>➔</span>
+            </button>
+        </form>
+        <p class="footer-note">Token streaming powered by Spring AI & OpenRouter.</p>
+    </footer>
+</div>
+
+<script>
+    const messagesContainer = document.getElementById('chatMessages');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    function scrollToBottom() {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function formatMarkdown(text) {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n\* /g, '<br>• ')
+            .replace(/\n- /g, '<br>• ')
+            .replace(/\n/g, '<br>');
+    }
+
+    function appendMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+
+        const avatarDiv = document.createElement('div');
+        avatarDiv.className = 'msg-avatar';
+        avatarDiv.textContent = sender === 'bot' ? 'NT' : 'You';
+
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.className = 'bubble';
+        bubbleDiv.textContent = text;
+
+        messageDiv.appendChild(avatarDiv);
+        messageDiv.appendChild(bubbleDiv);
+        messagesContainer.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
+    function createBotStreamingBubble() {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message bot';
+
+        const avatarDiv = document.createElement('div');
+        avatarDiv.className = 'msg-avatar';
+        avatarDiv.textContent = 'NT';
+
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.className = 'bubble';
+        bubbleDiv.innerHTML = '<span class="cursor"></span>';
+
+        messageDiv.appendChild(avatarDiv);
+        messageDiv.appendChild(bubbleDiv);
+        messagesContainer.appendChild(messageDiv);
+        scrollToBottom();
+        return bubbleDiv;
+    }
+
+    function showTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'message bot';
+        indicator.id = 'typingIndicator';
+        indicator.innerHTML = `
+            <div class="msg-avatar">NT</div>
+            <div class="typing-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        `;
+        messagesContainer.appendChild(indicator);
+        scrollToBottom();
+    }
+
+    function removeTypingIndicator() {
+        const indicator = document.getElementById('typingIndicator');
+        if (indicator) {
+            indicator.remove();
+        }
+    }
+
+    async function handleSend(e) {
+        if (e) e.preventDefault();
+        const query = messageInput.value.trim();
+        if (!query) return;
+
+        // Display user message
+        appendMessage('user', query);
+        messageInput.value = '';
+        messageInput.disabled = true;
+        sendBtn.disabled = true;
+
+        showTypingIndicator();
+
+        try {
+            // Streaming fetch request
+            const response = await fetch('/api/ask?message=' + encodeURIComponent(query));
+            if (!response.ok) {
+                throw new Error('Server returned HTTP ' + response.status);
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let accumulatedText = '';
+            let buffer = '';
+            let bubble = null;
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                // First chunk arrived: hide typing indicator and show streaming bubble
+                if (!bubble) {
+                    removeTypingIndicator();
+                    bubble = createBotStreamingBubble();
+                }
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop(); // keep trailing incomplete piece in buffer
+
+                for (const line of lines) {
+                    if (line.startsWith('data:')) {
+                        let token = line.slice(5);
+                        // SSE spec allows single leading space after 'data:'
+                        if (token.startsWith(' ')) {
+                            token = token.slice(1);
+                        }
+                        accumulatedText += token;
+                        bubble.innerHTML = formatMarkdown(accumulatedText) + '<span class="cursor"></span>';
+                        scrollToBottom();
+                    }
+                }
+            }
+
+            // Flush remaining buffer
+            if (buffer.startsWith('data:')) {
+                let token = buffer.slice(5);
+                if (token.startsWith(' ')) token = token.slice(1);
+                accumulatedText += token;
+            }
+
+            // Finalize: remove cursor
+            if (bubble) {
+                bubble.innerHTML = formatMarkdown(accumulatedText);
+            }
+
+        } catch (err) {
+            removeTypingIndicator();
+            const errorDiv = createBotStreamingBubble();
+            errorDiv.innerHTML = '⚠️ <em>Error connecting to the assistant. Please ensure the Spring Boot server and Ollama are active.</em>';
+            console.error('Streaming error:', err);
+        } finally {
+            messageInput.disabled = false;
+            sendBtn.disabled = false;
+            messageInput.focus();
+        }
+    }
+
+    function askQuickQuestion(questionText) {
+        messageInput.value = questionText;
+        handleSend();
+    }
+</script>
+
+</body>
+</html>
