@@ -1,0 +1,25 @@
+spring.application.name=RAGDemo
+
+# Specify active model types to resolve ambiguity
+spring.ai.model.chat=openai
+spring.ai.model.embedding=ollama
+
+# ==========================================
+# OPENROUTER
+# ==========================================
+spring.ai.openai.base-url=${OPENROUTER_BASE_URL:https://openrouter.ai/api/v1}
+spring.ai.openai.api-key=${OPENROUTER_API_KEY:your_openrouter_api_key_here}
+spring.ai.openai.chat.options.model=${OPENROUTER_MODEL:openrouter/free}
+
+# ==========================================
+# OLLAMA
+# ==========================================
+spring.ai.ollama.base-url=${OLLAMA_BASE_URL:http://localhost:11434}
+spring.ai.ollama.embedding.options.model=all-minilm:latest
+
+# ==========================================
+# PINECONE
+# ==========================================
+spring.ai.vectorstore.pinecone.api-key=${PINECONE_API_KEY:your_pinecone_api_key_here}
+spring.ai.vectorstore.pinecone.index-name=${PINECONE_INDEX_NAME:company-support}
+spring.ai.vectorstore.pinecone.namespace=${PINECONE_NAMESPACE:company-support}
